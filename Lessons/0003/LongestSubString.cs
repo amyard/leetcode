@@ -4,9 +4,9 @@ public class LongestSubString
 {
     public static void Start()
     {
-        // var r1 = Execute("abcabcbb"); // 3 
-        // Print(r1, 3);
-        //
+        var r1 = Execute("abcabcbb"); // 3 
+        Print(r1, 3);
+        
         // var r2 = Execute(""); // 0
         // Print(r2, 0);
         //
@@ -19,8 +19,8 @@ public class LongestSubString
         // var r5 = Execute("au"); // 2
         // Print(r5, 2);
         //
-        var r6 = Execute("dvdf");
-        Print(r6, 3);
+        // var r6 = Execute("dvdf");
+        // Print(r6, 3);
     }
 
     public static void Print(int res, int expected)
@@ -30,6 +30,26 @@ public class LongestSubString
     }
 
     public static int Execute(string s)
+    {
+        int res = 0;
+        var span = s.AsSpan();
+        
+        for (int i = 0; i < s.Length; i++)
+        {
+            var slice = span.Slice(i + 1, s.Length - i - 1);
+            var index = slice.IndexOf(span[i]);
+            Console.WriteLine($"slice: {slice.ToString()}. value: {span[i]}. index: {index}.");
+
+            if (index >=0 )
+                res = index + 1 > res ? index + 1 : res;
+            else
+                res = slice.Length+1 > res ? slice.Length + 1 : res;
+        }
+        
+        return res;
+    }
+
+    public static int Execute2(string s)
     {
         int res = 0;
         int lastPosition = 0;
