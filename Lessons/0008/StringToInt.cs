@@ -7,9 +7,10 @@ public class StringToInt
         Print("42", 42);
         Print("     -42", -42);
         Print("456 with words", 456);
-        Print("lol 456 with words", 456);
-        // Print("", 0000);
-        // Print("", 0000);
+        //Print("lol 456 with words", 456);
+        Print("words and 987", 0);
+        Print("+1", 1);
+        Print("+-12", 0);
     }
 
     public static void Print(string s, int expected)
@@ -20,6 +21,41 @@ public class StringToInt
     }
 
     public static int Execute(string s)
+    {
+        var span = s.Trim().AsSpan();
+        long res = 0;
+        int negative = 1; 
+
+        for (int i = 0; i < span.Length; i++)
+        {
+            if (!Char.IsDigit(span[i]))
+            {
+                if (span[i] == '-' || span[i] == '+')
+                    continue;
+                break;
+            }
+            
+            if (span[i]-'0' > 0)
+            {
+                res = res * 10 + span[i]-'0';
+             
+                if (i > 0 && span[i - 1] == '-')
+                    negative = -1;
+            }
+        }
+
+        res *= negative;
+
+        if (res > Int32.MaxValue)
+            return Int32.MaxValue;
+        
+        if (res < Int32.MinValue)
+            return Int32.MinValue;
+
+        return (int)res;
+    }
+    
+    public static int Execute2(string s)
     {
         var span = s.AsSpan();
         long res = 0;
