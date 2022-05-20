@@ -1,4 +1,4 @@
 ﻿
-using LeetCode.Lessons._0007;
+using LeetCode.Lessons._0008;
 
-ReversInteger.Run();
+StringToInt.Run();
