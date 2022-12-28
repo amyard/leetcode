@@ -11,7 +11,8 @@ public static class e_0013_RomanToInt
 
     public static void Print(string s, int expected)
     {
-        int res = Execute(s);
+        //int res = Execute(s);
+        int res = Execute2(s);
         Console.WriteLine($"current: {res}. expected: {expected}");
         Console.WriteLine("------------------------");
     }
@@ -76,6 +77,47 @@ public static class e_0013_RomanToInt
             // Console.WriteLine("-----------------");
         }
         
+        return res;
+    }
+
+    public static int Execute2(string s)
+    {
+        int res = 0;
+        int tempValue = 0;
+        
+        for (int i = 1; i <= s.Length; i++)
+        {
+            int convertedValue = ConvertRomanToIntValue(s[^i]);
+            
+            if (convertedValue >= tempValue )
+            {
+                res += convertedValue;
+            }
+            else
+            {
+                res -= convertedValue;
+            }
+
+            tempValue = convertedValue;
+        }
+        
+        return res;
+    }
+
+    private static int ConvertRomanToIntValue(char romanChar)
+    {
+        int res = romanChar switch
+        {
+            'I' => 1,
+            'V' => 5,
+            'X' => 10,
+            'L' => 50,
+            'C' => 100,
+            'D' => 500,
+            'M' => 1000,
+            _ => 0,
+        };
+
         return res;
     }
 }
