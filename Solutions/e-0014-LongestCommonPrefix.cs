@@ -41,4 +41,31 @@ public class LongestCommonPrefix
         }   
         return res.ToString();
     }
+    
+    public static string Execute2(string[] strs)
+    {
+        StringBuilder res = new ();
+
+        if (strs.Length == 0) return res.ToString();
+        if (strs.Length == 1) return strs[0];
+
+        ReadOnlySpan<char> shortest = strs.OrderBy(x => x.Length)
+            .First()
+            .AsSpan();
+        
+        if (shortest.IsEmpty) return res.ToString();
+
+        for (int i = 0; i < shortest.Length; i++)
+        {
+            foreach (var arrValue in strs)
+            {
+                if (arrValue[i] != shortest[i])
+                    return res.ToString();
+            }
+
+            res.Append(shortest[i]);
+        }
+        
+        return res.ToString();
+    }
 }
