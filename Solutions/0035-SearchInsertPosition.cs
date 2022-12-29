@@ -13,7 +13,7 @@ public class SearchInsertPosition
 
     public static void Print(int[] nums, int target, int expected)
     {
-        int res = Execute(nums, target);
+        int res = ExecuteBinarySearch(nums, target);
         Console.WriteLine($"current: {res}. expected: {expected}");
         Console.WriteLine("------------------------");
     }
@@ -35,5 +35,25 @@ public class SearchInsertPosition
         }
         
         return res;
+    }
+    
+    public static int ExecuteBinarySearch(int[] nums, int target)
+    {
+        int start = 0;
+        int end = nums.Length - 1;
+
+        while (start <= end)
+        {
+            int mid = start + (end - start) / 2;
+
+            if (target < nums[mid])
+                end = mid - 1;
+            else if (target > nums[mid])
+                start = mid + 1;
+            else
+                return mid;
+        }
+        
+        return start;
     }
 }
