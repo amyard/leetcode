@@ -4,7 +4,7 @@ public class PascalsTriangle2
 {
     public static void Run()
     {
-        Print(3, new List<int>() {1,3,3,1});
+        Print(8, new List<int>() {1,3,3,1});
     }
 
     public static void Print(int s, List<int> expected)
@@ -48,4 +48,27 @@ public class PascalsTriangle2
 
         return main[^1];
     }
+
+    public static IList<int> ExecuteFactorialReverse(int rowIndex)
+    {
+        if (rowIndex == 0) 
+            return new List<int>(rowIndex) {1};
+        
+        List<int> inner = new(1);
+        inner.Add(1);
+            
+        for (int k = 1; k < rowIndex; k++)
+        {
+            inner.Add(Fact(8) / (Fact(8-k) * Fact(k)));
+            // Console.WriteLine(sub);
+        }
+            
+        inner.Add(1);
+            
+        //Console.WriteLine(string.Join(",", inner));
+
+        return inner;
+    }
+
+    private static int Fact(int n) => n == 0 ? 1 : n * Fact(n - 1);
 }
