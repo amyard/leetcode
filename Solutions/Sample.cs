@@ -1,5 +1,6 @@
-﻿namespace LeetCode.Solutions;
+﻿using LeetCode.Entities;
 
+namespace LeetCode.Solutions;
 public class Sample
 {
     public static void Run()
