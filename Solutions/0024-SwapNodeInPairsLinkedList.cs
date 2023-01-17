@@ -19,31 +19,23 @@ public class SwapNodeInPairsLinkedList
 
     public static ListNode Execute(ListNode head)
     {
-        ListNode result = new ListNode();
-        ListNode result2 = result;
-        result = head;
+        ListNode slow = head;
+        ListNode fast = head;
         
-        int iter = 1;
-
-        if (head.next is null)
-            return head;
-
-        while (head is not null)
+        while(slow != null && slow.next != null)
         {
-            if (iter % 2 == 0)
-            {
-                head = head.next;
-                iter++;
-                continue;
-            }
-
-            result.next = head;
-            result = head.next;
+            fast = slow.next;
             
-            head = head.next;
-            iter++;
-        }
+            //swap the nodes
+            (fast.val,slow.val) = (slow.val,fast.val);
+            // fast.val = slow.val;
+            // slow.val = fast.val;
+                
+            //move on
+            slow = fast.next;
 
-        return result;
+            var asd = "aaaa";
+        }
+        return head;
     }
 }
